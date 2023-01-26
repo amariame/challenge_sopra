@@ -1,0 +1,11 @@
+com/miage/strategie/Player.class
+com/miage/strategie/Think.class
+com/miage/strategie/Position.class
+com/miage/BattleMain.class
+com/miage/strategie/Bonus.class
+com/miage/KartClientApi.class
+com/miage/KartClientRestApi.class
+com/miage/MoteurDeJeu.class
+com/miage/strategie/Item.class
+com/miage/strategie/PositionPlayer.class
+com/miage/strategie/Board.class
