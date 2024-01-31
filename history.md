@@ -71,3 +71,5 @@ List<Position> taches =items.stream().map(Item::getPosition).collect(Collectors.
             }
         }*/
 ```
+
+Implementer cette nouvelle strategie
