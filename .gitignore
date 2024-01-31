@@ -1,5 +1,4 @@
  target
 .idea
-.history.md
+./.history.md
 src/main/resources/**/configuration.properties
-**/logs
