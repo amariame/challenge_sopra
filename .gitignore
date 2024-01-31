@@ -1,5 +1,5 @@
-./target
+ target
 .idea
 .history.md
-./src/main/resources/configuration.properties
+src/main/resources/**/configuration.properties
 **/logs
