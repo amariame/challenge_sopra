@@ -26,32 +26,33 @@ public class BattleMain {
         if(cmd.hasOption('e')) {
             numBot = Integer.parseInt(cmd.getOptionValue('e'));
         }
-
-
-
         partieId = mdj.startPartie(numBot);
+        if(partieId.equals("NA")){
+            System.out.println("Aucune partie n'est ouverte");
+        }
+        else {
+            System.out.println("Partie en cours.....");
+            System.out.println(mdj.getBoard(partieId).getItems());
+            //mdj.getBoard(partieId).getItems().stream().map((item -> {}))
+            int[] lines = {0,0,0,0};
+            do {
+                status = mdj.getStatus(partieId);
+                List<Item> items = mdj.item_board(partieId);
 
-        System.out.println("Partie en cours.....");
 
+                if (status.equals("CANPLAY")) {
 
+                    Position myPosition = mdj.getBoard(partieId).getSelfPlayer().getPosition();
 
-        do {
-            status = mdj.getStatus(partieId);
-            List<Item> items = mdj.item_board(partieId);
+                    status = mdj.play(partieId, mdj.mouve(myPosition, mdj.getBoard(partieId)));
+                    System.out.println("Status : " + status);
 
+                }
+                Thread.sleep(1000);
+            } while (!status.equals("RANKING") && !status.equals("RANKED"));
 
-            if (status.equals("CANPLAY")) {
-
-                Position myPosition = mdj.getBoard(partieId).getSelfPlayer().getPosition();
-
-                status = mdj.play(partieId, mdj.mouve(myPosition,mdj.getBoard(partieId)));
-                System.out.println("Status : "+status);
-
-            }
-            Thread.sleep(100);
-        } while (!status .equals("RANKING") && !status.equals("RANKED"));
-
-        System.out.println("Partie terminee "+partieId);
+            System.out.println("Partie terminee " + partieId);
+        }
     }
 
 }

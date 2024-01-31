@@ -23,7 +23,7 @@ public class MoteurDeJeuTest {
 
     @Test
     void testCallPingService(){
-        Assertions.assertEquals("pong",mdj.callPingService());
+        Assertions.assertEquals("pong",mdj.ping());
     }
     /*
     @Test

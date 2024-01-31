@@ -7,7 +7,7 @@ public interface KartClientApi {
      * Utilisez cette méthode pour obtenir votre identifiant !
      * @return Envoie l'identifiant de l'équipe à partir de son nom et du mot de passe associé.
      */
-    String equipeId();
+    String getEquipeId();
 
     String praticeId(int idBot);
 
@@ -42,7 +42,7 @@ public interface KartClientApi {
      *      * "CANCELLED" si la partie a été annulée
      *      * "DEFEAT" - Vous êtes mort !
      */
-    String status(String idPartie, String idEquipe);
+    String getStatus(String idPartie, String idEquipe);
 
 
     /**
@@ -54,7 +54,7 @@ public interface KartClientApi {
      * @param idPartie Identifant de la partie
      * @return Renvoie, l'équipe de chaque joueur avec les informations sur chaque personnage.
      */
-    String board(String idPartie, String idEquipe);
+    String getBoard(String idPartie, String idEquipe);
 
 
     /**

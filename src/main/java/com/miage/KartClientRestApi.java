@@ -2,7 +2,6 @@ package com.miage;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -24,14 +23,14 @@ public class KartClientRestApi implements KartClientApi {
     }
 
     @Override
-    public String equipeId() {
+    public String getEquipeId() {
         String uri = "player/getIdEquipe/"+prop.getProperty("team.name")+"/"+prop.getProperty("team.password");
         return serviceCall(uri);
     }
 
     @Override
     public String praticeId(int idBot) {
-        String uri = "pratice/new/"+idBot+"/"+this.equipeId();
+        String uri = "pratice/new/"+idBot+"/"+this.getEquipeId();
         return serviceCall(uri);
     }
 
@@ -48,13 +47,13 @@ public class KartClientRestApi implements KartClientApi {
     }
 
     @Override
-    public String status(String idPartie, String idEquipe) {
+    public String getStatus(String idPartie, String idEquipe) {
         String uri = "game/status/"+idPartie+"/"+idEquipe;
         return serviceCall(uri);
     }
 
     @Override
-    public String board(String idPartie, String idEquipe) {
+    public String getBoard(String idPartie, String idEquipe) {
         //format=(JSON|String|XML)
         String uri = "game/board/"+idPartie+"/"+idEquipe+"?format=JSON";
         String b= serviceCall(uri);

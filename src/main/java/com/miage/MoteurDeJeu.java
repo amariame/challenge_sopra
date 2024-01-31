@@ -6,7 +6,6 @@ import com.miage.beans.Board;
 import com.miage.beans.Item;
 import com.miage.beans.Position;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,16 +19,16 @@ public class MoteurDeJeu {
     public  MoteurDeJeu(KartClientApi kartClientApi){
 
         this.kartClientApi = kartClientApi;
-        this.idEquipe = this.kartClientApi.equipeId();
+        this.idEquipe = this.kartClientApi.getEquipeId();
     }
 
-    public String callPingService(){
+    public String ping(){
         return  this.kartClientApi.ping();
     }
 
 
     public String getEquipeId(){
-        return this.kartClientApi.equipeId();
+        return this.kartClientApi.getEquipeId();
     }
 
     public String newPractice(int idBot){
@@ -41,12 +40,12 @@ public class MoteurDeJeu {
     }
 
     public String getStatus(String idPartie){
-        return  this.kartClientApi.status(idPartie,this.idEquipe);
+        return  this.kartClientApi.getStatus(idPartie,this.idEquipe);
     }
 
     public Board getBoard(String idPartie){
 
-        return jsonSereliaze(this.kartClientApi.board(idPartie,this.idEquipe));
+        return jsonSereliaze(this.kartClientApi.getBoard(idPartie,this.idEquipe));
     }
 
     public String play(String idPartie, String action){
@@ -138,27 +137,44 @@ public class MoteurDeJeu {
         return  move;
     }
 
-
+    /**
+     * Lance une nouvelle partie
+     * versus si bot vaut -1
+     * sinon practice
+     * @param bot numero de bot
+     * @return String
+     */
     public String startPartie( int bot){
-        System.out.println("Starting.....");
+        System.out.println("Start new partie.....");
         String partieId="NA";
-        if(bot == -1){
+        while (partieId.equals("NA")){
+            //System.out.println("attente "+partieId);
+            partieId = bot == - 1
+                    ? this.newVersus()
+                    : this.newPractice(bot);
+        }
+        System.out.println("Partie "+partieId);
+        /*if(bot == -1){
             System.out.println("NOUVELLE PARTIE VERSUS");
-            while (partieId.equals("NA")){
+            System.out.println("Creation de la partie ....");
+            System.out.println("wait....");
+            while (partieId.equals("NA")) {
+                System.out.println("waiting....");
                 partieId = this.newVersus();
             }
+            System.out.println("done lests go -:)");
             System.out.println("Equipe "+this.idEquipe);
             System.out.println("Versus "+partieId);
         }
         else {
             System.out.println("NOUVELLE PARTIE BOT");
             System.out.println("Creation de la partie ....");
-            System.out.println("wait....");
-            while (partieId.equals("NA")){
+            while (partieId.equals("NA")) {
                 partieId = this.newPractice(bot);
             }
+            System.out.println("wait....");
             System.out.println("Partie crée :-)");
-        }
+        }*/
 
         return partieId;
     }

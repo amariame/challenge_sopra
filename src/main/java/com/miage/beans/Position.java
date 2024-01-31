@@ -6,8 +6,4 @@ import lombok.Data;
 public class Position{
     protected int lane;
     protected int row;
-
-
-
-    
 }
